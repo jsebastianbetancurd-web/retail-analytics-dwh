@@ -38,6 +38,67 @@ flowchart LR
 
 ---
 
+## ⭐ Star Schema (Modelo Dimensional)
+
+```mermaid
+erDiagram
+    dim_date ||--o{ fact_orders : "order_date_key"
+    dim_customers ||--o{ fact_orders : "customer_key"
+    dim_products ||--o{ fact_orders : "product_key"
+    dim_sellers ||--o{ fact_orders : "seller_key"
+
+    dim_date {
+        int date_key PK
+        date full_date
+        int year
+        int quarter
+        int month
+        varchar month_name
+        boolean is_weekend
+    }
+
+    dim_customers {
+        int customer_key PK
+        varchar customer_unique_id
+        varchar customer_city
+        varchar customer_state
+    }
+
+    dim_products {
+        int product_key PK
+        varchar product_id
+        varchar product_category_pt
+        varchar product_category_en
+        double avg_price
+        varchar price_band
+    }
+
+    dim_sellers {
+        int seller_key PK
+        varchar seller_id
+        varchar seller_city
+        varchar seller_state
+    }
+
+    fact_orders {
+        varchar order_id PK
+        int order_item_id PK
+        int customer_key FK
+        int product_key FK
+        int seller_key FK
+        int order_date_key FK
+        double price
+        double freight_value
+        int review_score
+        int days_to_deliver
+        int delivery_delay_days
+    }
+```
+
+> **Granularidad:** Cada fila en `fact_orders` representa un ítem dentro de una orden. Una orden con 3 productos genera 3 filas.
+
+---
+
 ## 📂 Estructura del Proyecto
 
 ```
@@ -82,7 +143,10 @@ python 01_ingestion/download_dataset.py
 python 01_ingestion/validate_raw.py
 python 01_ingestion/load_to_staging.py
 
-# 6. Ejecutar transformaciones dbt
+# 6. Construir star schema
+python 02_warehouse/build_warehouse.py
+
+# 7. Ejecutar transformaciones dbt
 cd 03_transform
 dbt run
 dbt test
@@ -93,8 +157,8 @@ dbt test
 ## 🛠️ Estado del Proyecto
 
 - [x] Etapa 1 — Setup del entorno y descarga del dataset
-- [ ] Etapa 2 — Pipeline ETL: validación y carga a staging
-- [ ] Etapa 3 — Modelado del Data Warehouse: Star Schema
+- [x] Etapa 2 — Pipeline ETL: validación y carga a staging
+- [x] Etapa 3 — Modelado del Data Warehouse: Star Schema
 - [ ] Etapa 4 — Transformaciones ELT con dbt Core
 - [ ] Etapa 5 — Análisis, Power BI y README final
 
