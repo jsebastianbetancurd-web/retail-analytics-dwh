@@ -1,0 +1,22 @@
+# ============================================
+# retail-analytics-dwh — Dependencias Python
+# ============================================
+# Instalar con: pip install -r requirements.txt
+
+# --- Ingesta y procesamiento ---
+pandas>=2.0.0
+duckdb>=1.0.0
+kaggle>=1.6.0           # Cliente oficial de la API de Kaggle
+
+# --- Transformaciones ELT (dbt) ---
+dbt-core>=1.8.0
+dbt-duckdb>=1.8.0       # Adapter de dbt para DuckDB
+
+# --- Análisis y visualización ---
+jupyter>=1.0.0
+matplotlib>=3.7.0
+seaborn>=0.13.0
+
+# --- Utilidades ---
+python-dotenv>=1.0.0    # Cargar variables de entorno desde .env
+tqdm>=4.65.0            # Barras de progreso para scripts

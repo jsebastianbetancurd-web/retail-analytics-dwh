@@ -1,0 +1,53 @@
+# ============================================
+# retail-analytics-dwh — .gitignore
+# ============================================
+
+# --- Datos ---
+# Los CSV crudos no se versionan; se descargan con el script
+data/raw/
+data/*.zip
+
+# --- Base de datos ---
+# DuckDB genera archivos binarios que no deben versionarse
+*.duckdb
+*.duckdb.wal
+
+# --- Credenciales y variables de entorno ---
+.env
+kaggle.json
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+env/
+
+# --- Jupyter ---
+.ipynb_checkpoints/
+
+# --- dbt ---
+# dbt genera artefactos en target/ y logs en logs/
+03_transform/target/
+03_transform/logs/
+03_transform/dbt_packages/
+
+# --- Power BI ---
+# Los .pbix son binarios pesados; usamos screenshots en su lugar
+# Si quieres versionar el .pbix, comenta la siguiente línea
+*.pbix
+
+# --- IDE ---
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+desktop.ini
