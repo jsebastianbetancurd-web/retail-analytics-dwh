@@ -1,0 +1,95 @@
+# ============================================================================
+# _stg_sources.yml — Definicion de fuentes (sources) para dbt
+# ============================================================================
+# Los "sources" en dbt son tablas que EXISTEN FUERA de dbt — en nuestro caso,
+# las tablas stg_* que creamos con el pipeline Python en la Etapa 2.
+#
+# Definirlas aqui permite:
+#   1. Usar {{ source('staging', 'stg_orders') }} en los modelos
+#   2. dbt las incluye en el grafo de linaje
+#   3. Podemos aplicar tests de freshness (frescura de datos)
+
+version: 2
+
+sources:
+  - name: staging
+    description: "Tablas staging cargadas por el pipeline ETL Python (load_to_staging.py)"
+    schema: staging
+    tables:
+      - name: stg_orders
+        description: "Ordenes del marketplace Olist — una fila por orden"
+        columns:
+          - name: order_id
+            description: "Identificador unico de la orden"
+          - name: customer_id
+            description: "FK al cliente (ID por transaccion, no unico por persona)"
+          - name: order_status
+            description: "Estado de la orden: delivered, shipped, canceled, etc."
+          - name: order_purchase_timestamp
+            description: "Fecha y hora de la compra"
+
+      - name: stg_customers
+        description: "Clientes del marketplace — una fila por customer_id"
+        columns:
+          - name: customer_id
+            description: "ID del cliente por transaccion"
+          - name: customer_unique_id
+            description: "ID unico real del cliente (puede tener multiples customer_id)"
+
+      - name: stg_order_items
+        description: "Items dentro de cada orden — una fila por item"
+        columns:
+          - name: order_id
+            description: "FK a la orden"
+          - name: order_item_id
+            description: "Secuencial del item dentro de la orden"
+          - name: product_id
+            description: "FK al producto"
+          - name: seller_id
+            description: "FK al vendedor"
+
+      - name: stg_order_payments
+        description: "Pagos por orden — puede haber multiples pagos por orden"
+        columns:
+          - name: order_id
+            description: "FK a la orden"
+          - name: payment_sequential
+            description: "Secuencial del pago dentro de la orden"
+
+      - name: stg_order_reviews
+        description: "Resenas de clientes — una por orden"
+        columns:
+          - name: review_id
+            description: "ID unico de la resena"
+          - name: order_id
+            description: "FK a la orden"
+          - name: review_score
+            description: "Calificacion del 1 al 5"
+
+      - name: stg_products
+        description: "Catalogo de productos"
+        columns:
+          - name: product_id
+            description: "ID unico del producto"
+          - name: product_category_name
+            description: "Categoria del producto en portugues"
+
+      - name: stg_sellers
+        description: "Vendedores del marketplace"
+        columns:
+          - name: seller_id
+            description: "ID unico del vendedor"
+
+      - name: stg_geolocation
+        description: "Geolocalizacion por codigo postal"
+        columns:
+          - name: geolocation_zip_code_prefix
+            description: "Codigo postal (deduplicado)"
+
+      - name: stg_category_translation
+        description: "Traduccion de categorias de producto: portugues a ingles"
+        columns:
+          - name: product_category_name
+            description: "Nombre en portugues"
+          - name: product_category_name_english
+            description: "Nombre en ingles"

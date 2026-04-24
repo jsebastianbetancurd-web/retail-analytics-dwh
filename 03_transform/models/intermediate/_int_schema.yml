@@ -1,0 +1,39 @@
+# ============================================================================
+# _int_schema.yml — Tests para modelos intermediate
+# ============================================================================
+
+version: 2
+
+models:
+  - name: int_orders_items_joined
+    description: >
+      Ordenes enriquecidas con items, pagos y reviews.
+      Granularidad: una fila por item de orden.
+      Este es el modelo intermedio central para los marts.
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+      - name: order_item_id
+        tests:
+          - not_null
+      - name: price
+        tests:
+          - not_null
+      - name: review_score
+        description: "Score 1-5 (denormalizado de la orden)"
+
+  - name: int_products_enriched
+    description: >
+      Catalogo de productos enriquecido con categoria traducida,
+      precio promedio y banda de precio.
+    columns:
+      - name: product_id
+        tests:
+          - not_null
+          - unique
+      - name: price_band
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['budget', 'mid_range', 'premium', 'luxury', 'no_sales']

@@ -103,12 +103,18 @@ erDiagram
 
 ```
 retail-analytics-dwh/
-├── 01_ingestion/          ← Pipeline ETL: descarga, validación, carga
-├── 02_warehouse/          ← DDL del star schema: dims + fact
-├── 03_transform/          ← Proyecto dbt: staging → intermediate → marts
-├── 04_analysis/           ← Notebooks de EDA y análisis de KPIs
-├── 05_dashboards/         ← Dashboard Power BI + screenshots
-└── data/raw/              ← CSV crudos (no versionados, se descargan con script)
+├── 01_ingestion/              ← Pipeline ETL: descarga, validación, carga
+├── 02_warehouse/              ← DDL del star schema: dims + fact
+├── 03_transform/              ← Proyecto dbt Core
+│   ├── models/
+│   │   ├── staging/           ← 9 modelos + sources (views)
+│   │   ├── intermediate/      ← 2 modelos de joins enriquecidos (views)
+│   │   └── marts/             ← 3 marts finales para Power BI (tables)
+│   ├── dbt_project.yml
+│   └── profiles.yml           ← Conexión a DuckDB
+├── 04_analysis/               ← Notebooks de EDA y análisis de KPIs
+├── 05_dashboards/             ← Dashboard Power BI + screenshots
+└── data/raw/                  ← CSV crudos (no versionados)
 ```
 
 ---
@@ -146,10 +152,14 @@ python 01_ingestion/load_to_staging.py
 # 6. Construir star schema
 python 02_warehouse/build_warehouse.py
 
-# 7. Ejecutar transformaciones dbt
+# 7. Ejecutar transformaciones dbt (14 modelos + 23 tests)
 cd 03_transform
-dbt run
-dbt test
+dbt run --profiles-dir .
+dbt test --profiles-dir .
+
+# 8. (Opcional) Ver documentación con DAG de linaje
+dbt docs generate --profiles-dir .
+dbt docs serve --profiles-dir .
 ```
 
 ---
@@ -159,7 +169,7 @@ dbt test
 - [x] Etapa 1 — Setup del entorno y descarga del dataset
 - [x] Etapa 2 — Pipeline ETL: validación y carga a staging
 - [x] Etapa 3 — Modelado del Data Warehouse: Star Schema
-- [ ] Etapa 4 — Transformaciones ELT con dbt Core
+- [x] Etapa 4 — Transformaciones ELT con dbt Core (14 modelos, 23 tests)
 - [ ] Etapa 5 — Análisis, Power BI y README final
 
 ---

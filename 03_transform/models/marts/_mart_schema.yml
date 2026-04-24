@@ -1,0 +1,49 @@
+# ============================================================================
+# _mart_schema.yml — Tests y documentacion para marts
+# ============================================================================
+# Los marts son las tablas finales que consume Power BI.
+# Tests aqui verifican que las metricas de negocio tienen sentido.
+
+version: 2
+
+models:
+  - name: mart_sales_by_region
+    description: >
+      KPIs de ventas agregados por estado y ciudad brasilena.
+      Columnas clave: total_revenue, avg_order_value, avg_review_score, pct_late.
+      Materializado como TABLE para consultas rapidas desde Power BI.
+    columns:
+      - name: customer_state
+        description: "Estado brasileno (2 letras, ej: SP, RJ, MG)"
+        tests:
+          - not_null
+      - name: total_revenue
+        description: "Revenue total en BRL"
+        tests:
+          - not_null
+
+  - name: mart_product_performance
+    description: >
+      Performance por categoria de producto y banda de precio.
+      Columnas clave: total_revenue, total_items_sold, avg_review_score.
+    columns:
+      - name: category_en
+        description: "Categoria del producto en ingles"
+        tests:
+          - not_null
+      - name: price_band
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['budget', 'mid_range', 'premium', 'luxury', 'no_sales']
+
+  - name: mart_delivery_kpis
+    description: >
+      KPIs de logistica por estado y mes.
+      Columnas clave: on_time_rate_pct, avg_days_to_deliver, avg_delay_when_late.
+    columns:
+      - name: customer_state
+        tests:
+          - not_null
+      - name: on_time_rate_pct
+        description: "Porcentaje de entregas a tiempo (0-100)"
