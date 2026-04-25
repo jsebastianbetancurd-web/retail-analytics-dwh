@@ -1,8 +1,8 @@
 # 📊 Retail Analytics Data Warehouse
 
-**Data Warehouse de retail con pipeline ETL/ELT completo**, construido como proyecto de portfolio para demostrar competencias en analytics engineering.
+**Data Warehouse de retail con pipeline ETL/ELT completo**..
 
-> Simulación de un entorno analítico para un equipo de retail — similar al rol de un Profesional de Datos Senior en empresas como KOAJ (Permoda Ltda.)
+> Simulación de un entorno analítico para un equipo de retail.
 
 [![Python](https://img.shields.io/badge/Python-3.14-blue)](https://python.org)
 [![DuckDB](https://img.shields.io/badge/DuckDB-1.5.2-yellow)](https://duckdb.org)
@@ -18,7 +18,7 @@ Un equipo de retail necesita insights accionables sobre:
 - **Clientes:** ¿Dónde se concentran los clientes? ¿Cómo varía la satisfacción por región?
 - **Logística:** ¿Cuánto tarda la entrega promedio? ¿Qué estados tienen peor performance logístico?
 
-Este proyecto construye la infraestructura de datos que responde esas preguntas, desde la ingesta de datos crudos hasta visualizaciones ejecutivas.
+Este proyecto construye la infraestructura de datos que responde esas preguntas, desde la ingesta de raw data hasta visualizaciones para decisiones ejecutivas.
 
 ---
 
@@ -267,7 +267,7 @@ dbt docs serve --profiles-dir .
 
 ## 👤 Autor
 
-**Jose Betancur** — Economista cuantitativo en transición hacia Analytics Engineering.
+**Jose Betancur** — Economista cuantitativo e Ingeniero de Datos.
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Conectar-blue)](https://www.linkedin.com/in/jsebastianbetancurd/)
 [![GitHub](https://img.shields.io/badge/GitHub-Portfolio-black)](https://github.com/jsebastianbetancurd-web)
