@@ -1,6 +1,6 @@
 # 📊 Retail Analytics Data Warehouse
 
-**Data Warehouse de retail con pipeline ETL/ELT completo**..
+**Data Warehouse de retail con pipeline ETL/ELT completo**.
 
 > Simulación de un entorno analítico para un equipo de retail.
 
