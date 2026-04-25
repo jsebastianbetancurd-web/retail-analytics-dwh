@@ -269,5 +269,5 @@ dbt docs serve --profiles-dir .
 
 **Jose Betancur** — Economista cuantitativo e Ingeniero de Datos.
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Conectar-blue)](https://www.linkedin.com/in/jsebastianbetancurd/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Conectar-blue)](https://www.linkedin.com/in/jose-sebastian-betancur-devia/)
 [![GitHub](https://img.shields.io/badge/GitHub-Portfolio-black)](https://github.com/jsebastianbetancurd-web)
