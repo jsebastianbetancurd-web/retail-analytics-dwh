@@ -4,10 +4,10 @@
 
 > Simulación de un entorno analítico para un equipo de retail.
 
-[![Python](https://img.shields.io/badge/Python-3.14)](https://python.org)
-[![DuckDB](https://img.shields.io/badge/DuckDB-1.5.2)](https://duckdb.org)
-[![dbt](https://img.shields.io/badge/dbt_Core-1.11.8)](https://getdbt.com)
-[![Tests](https://img.shields.io/badge/dbt_tests-23%20PASS)](https://getdbt.com)
+[![Python](https://img.shields.io/badge/Python-3.14-blue)](https://python.org)
+[![DuckDB](https://img.shields.io/badge/DuckDB-1.5.2-yellow)](https://duckdb.org)
+[![dbt](https://img.shields.io/badge/dbt_Core-1.11.8-orange)](https://getdbt.com)
+[![Tests](https://img.shields.io/badge/dbt_tests-23%20PASS-brightgreen)](https://getdbt.com)
 
 ---
 
