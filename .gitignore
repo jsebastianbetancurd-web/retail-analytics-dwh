@@ -1,0 +1,19 @@
+.env
+__pycache__/
+*.pyc
+.venv/
+venv/
+.vscode/
+.idea/
+
+# Data and database
+data/raw/*.csv
+data/*.duckdb
+data/*.log
+
+# EDA figures (keep the folder, but maybe not the actual runs if they are huge)
+# 04_analysis/figures/*.png
+
+# temporary files
+*.tmp
+.DS_Store

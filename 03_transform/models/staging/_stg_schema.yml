@@ -1,0 +1,58 @@
+# ============================================================================
+# _stg_schema.yml — Tests y documentacion para modelos staging
+# ============================================================================
+
+version: 2
+
+models:
+  - name: stg_orders
+    description: "Ordenes limpias con timestamps tipados"
+    columns:
+      - name: order_id
+        description: "Clave primaria de la orden"
+        tests:
+          - not_null
+          - unique
+      - name: order_status
+        description: "Estado de la orden"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['delivered', 'shipped', 'canceled', 'unavailable',
+                         'invoiced', 'processing', 'created', 'approved']
+
+  - name: stg_customers
+    description: "Clientes con ciudad/estado normalizados"
+    columns:
+      - name: customer_id
+        description: "ID del cliente por transaccion"
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_order_items
+    description: "Items de ordenes con precio y flete"
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+      - name: order_item_id
+        tests:
+          - not_null
+
+  - name: stg_products
+    description: "Catalogo de productos con categoria y dimensiones"
+    columns:
+      - name: product_id
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_sellers
+    description: "Vendedores del marketplace"
+    columns:
+      - name: seller_id
+        tests:
+          - not_null
+          - unique

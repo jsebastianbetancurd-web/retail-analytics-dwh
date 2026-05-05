@@ -1,0 +1,46 @@
+# ============================================================================
+# dbt_project.yml — Configuracion del proyecto dbt
+# ============================================================================
+# Este archivo define la estructura del proyecto, las materializaciones
+# por capa, y la configuracion global de dbt.
+
+name: 'retail_analytics'
+version: '1.0.0'
+config-version: 2
+
+# Perfil de conexion (definido en profiles.yml)
+profile: 'retail_analytics'
+
+# Directorio donde dbt busca los modelos SQL
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+# Directorio de artefactos generados por dbt (ignorado en .gitignore)
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+# ============================================================================
+# Materializacion por capa
+# ============================================================================
+# - staging:      VIEW — son transformaciones ligeras, no necesitan persistirse.
+#                 Leer de la fuente cada vez es rapido en DuckDB.
+# - intermediate: VIEW — joins intermedios, tampoco persisten.
+# - marts:        TABLE — tablas finales para Power BI. Se persisten para
+#                 que las queries de BI sean rapidas sin recalcular.
+# ============================================================================
+models:
+  retail_analytics:
+    staging:
+      +materialized: view
+      +schema: staging_dbt    # Schema donde se crean las vistas staging
+    intermediate:
+      +materialized: view
+      +schema: intermediate   # Schema para modelos intermedios
+    marts:
+      +materialized: table
+      +schema: marts          # Schema final para Power BI

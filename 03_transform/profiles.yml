@@ -1,0 +1,18 @@
+# ============================================================================
+# profiles.yml — Conexion a DuckDB
+# ============================================================================
+# Este perfil le dice a dbt DONDE estan los datos.
+# Apunta al archivo olist_dwh.duckdb que creamos en la Etapa 2.
+#
+# Para ejecutar dbt desde 03_transform/, usamos:
+#   dbt run --profiles-dir .
+# ============================================================================
+
+retail_analytics:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: '../data/olist_dwh.duckdb'   # Ruta relativa al archivo DuckDB
+      schema: analytics                   # Schema por defecto para modelos
+      threads: 4                          # Paralelismo de ejecucion
